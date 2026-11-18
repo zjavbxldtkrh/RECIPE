@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RE:CIPE</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F5EF;--tx:#292922;--g:#536D59;--g2:#E8EEE8;--ln:#DEDCD4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 'Gowun Dodum',sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:9;background:#F7F5EF;border-bottom:2px solid var(--ln);display:flex;align-items:center;gap:6px;padding:0 14px;overflow-x:auto}
+.logo{font:24px 'Black Han Sans';color:var(--g);-webkit-text-stroke:1px #F7F5EF;text-shadow:2px 2px 0 var(--tx);margin-right:14px;white-space:nowrap;display:flex;align-items:center;gap:4px}
+nav a{display:inline-flex;align-items:center;gap:6px;padding:16px 12px 12px;border-bottom:4px solid transparent;white-space:nowrap}
+nav a.on{color:var(--g);border-color:var(--g);font-weight:700}
+.px{image-rendering:pixelated;display:block;max-width:100%;height:auto}
+main{position:relative;overflow:hidden}
+.home{min-height:calc(100vh - 56px);display:flex;flex-direction:column;align-items:center;padding:40px 16px 80px;background:linear-gradient(transparent 62%,#E8EEE8 62%,#E8EEE8 100%);position:relative}
+.home:after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:repeating-conic-gradient(#d4dfd2 0 25%,#E8EEE8 0 50%) 0 0/48px 48px;opacity:.7;z-index:0}
+.home>*{position:relative;z-index:1}
+.lg{font:clamp(54px,12vw,120px)/1 'Black Han Sans';margin:10px 0 0;color:var(--g);-webkit-text-stroke:3px #F7F5EF;text-shadow:4px 4px 0 var(--tx),-2px -2px 0 #F7F5EF;letter-spacing:2px}
+.lg span{display:inline-block;animation:pop .6s both,bob 2.2s ease-in-out infinite;animation-delay:calc(var(--i)*.09s),calc(.7s + var(--i)*.12s)}
+@keyframes pop{0%{transform:translateY(-40px) scale(.3);opacity:0}70%{transform:translateY(6px) scale(1.1)}100%{transform:none;opacity:1}}
+@keyframes bob{0%,55%,100%{transform:translateY(0)}25%{transform:translateY(-9px)}}
+.ph{font-size:18px;text-align:center;max-width:460px;margin:14px 0 30px;min-height:56px}
+.cards{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.card{background:#fff;border:2px solid var(--ln);border-radius:20px;padding:22px;display:flex;gap:16px;align-items:center;width:340px;box-shadow:0 4px 0 var(--ln);transition:transform .15s}
+.card:hover{transform:translateY(-4px)}
+.card h3{margin:0 0 4px;font:24px 'Jua'}.card p{margin:0 0 12px;font-size:14px}
+.btn{display:inline-block;background:var(--g);color:#fff;border:0;border-radius:999px;padding:8px 20px;font:inherit;cursor:pointer}
+.btn.o{background:#fff;color:var(--g);border:2px solid var(--g)}
+.chef{position:absolute!important;left:3%;bottom:12%}
+.fl{position:absolute!important;animation:fl 3s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-12px)}}
+.foot{margin-top:40px;font-size:12px;letter-spacing:3px;color:var(--g)}
+@media(max-width:900px){.chef{display:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.pg{max-width:880px;margin:0 auto;padding:36px 18px 80px}
+.pg h1{font:clamp(28px,5vw,40px)/1.25 'Jua';margin:0 0 6px}
+.pg h2{font:22px 'Jua';margin:28px 0 8px;color:var(--g)}
+.sub{color:#5a5a50;margin:0 0 24px}
+.box{background:#fff;border:2px solid var(--ln);border-radius:16px;padding:18px;margin-bottom:16px}
+input,textarea,select{font:inherit;border:2px solid var(--ln);border-radius:10px;padding:8px 10px;background:#fff;color:var(--tx);width:100%}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus,select:focus,.btn:focus-visible{outline:3px solid #536D5966}
+label{font-weight:700;display:block;margin:12px 0 4px}
+.row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.row>*{flex:1}.row .x{flex:0 0 auto}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{background:var(--g2);border-radius:999px;padding:4px 12px;cursor:pointer}
+.err{background:#fdeceb;border:2px solid #d8402f;color:#8a2218;border-radius:12px;padding:10px 14px;margin:12px 0}
+.note{background:var(--g2);border-radius:12px;padding:10px 14px;font-size:14px;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border-bottom:1px solid var(--ln);padding:6px 8px;text-align:left;vertical-align:top}
+.tag{display:inline-block;border-radius:999px;padding:2px 14px;color:#fff;font-weight:700}
+.hi{background:var(--g)}.mid{background:#c9942f}.lo{background:#d8402f}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.two{grid-template-columns:1fr}.card{width:100%}}
+ul,ol{margin:6px 0;padding-left:22px}
+.mode label{display:inline-block;margin:0 14px 0 0;font-weight:400}.mode input{width:auto}
+</style></head><body>
+<header><a href="#home" class="logo" id="lg"></a>
+<nav><a href="#home" data-p="home">⌂ 홈</a><a href="#recommend" data-p="recommend"><i id="nt"></i>레시피 추천</a><a href="#variation" data-p="variation">⟳ 레시피 변형</a></nav></header>
+<main id="app"></main>
+<datalist id="ing"><option value="젤라틴"><option value="한천 분말"><option value="식물성 오일"><option value="쌀가루"><option value="알룰로스"><option value="에리스리톨"><option value="꿀"><option value="버터"><option value="설탕"><option value="밀가루"></datalist>
+<script>
+// 서버(예: Cloudflare Workers/Vercel 함수)에 AI API를 연결했다면 그 주소를 넣으세요. API 키는 서버에만 보관합니다.
+const API_URL="";
+const $=s=>document.querySelector(s);
+const P={R:'#d8402f',G:'#4f7a45',H:'#ff8a78',D:'#a82a22',W:'#fff',S:'#d9d6c8',B:'#4a3030',K:'#f6d2b0',E:'#3a2a2a',M:'#d9766a',Y:'#c98a4b'};
+const HAT=["...SSSSSS...","..SWWWWWWS..",".SWWWWWWWWS.",".SWWWWWWWWS.","..SSSSSSSS.."];
+const SP={
+tomato:["...GG....","..GGGG...",".RRRRRRR.","RRHRRRRRR","RHRRRRRRR","RRRRRRRRR","RRRRRRRRD",".RRRRRDD.","..DDDDD.."],
+hat:[...HAT,"..SWWWWWWS..","..SSSSSSSS.."],
+chef:[...HAT,".BBBBBBBBBB.","BBKKKKKKKKBB","BBKEKKKKEKBB","BBKMKKKKMKBB","BBKKKMMKKKBB",".BBKKKKKKBB.","..SWWWWWWS..",".SWWWRRWWWS.",".SWWWWWWWWS.","..SWWWWWWS.."]};
+function px(n,s){const m=SP[n];let r='';m.forEach((row,y)=>[...row].forEach((c,x)=>{if(c!='.')r+=`<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${P[c]}"/>`}));return `<svg class="px" viewBox="0 0 ${m[0].length} ${m.length}" width="${m[0].length*s}" shape-rendering="crispEdges">${r}</svg>`}
+const PH=["레시피는 정답이 아니라, 내가 만드는 요리의 시작입니다.","오늘의 냉장고가 오늘의 레시피가 됩니다.","조금 바꿔도, 나만의 맛이 될 수 있어요.","재료가 달라지면 레시피도 달라져야 하니까.","남은 재료도 새로운 한 끼의 재료가 됩니다.","원래 레시피에 나만의 한 끗을 더해보세요.","바꾸고, 조정하고, 다시 맛보세요.","같은 레시피라도 오늘의 선택은 다를 수 있으니까."];
+const phrase=PH[Math.random()*PH.length|0];
+$('#lg').innerHTML=px('hat',2)+'RE:CIPE';$('#nt').innerHTML=px('tomato',2);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>Math.round(n*10)/10;
+
+/* ---------- 홈 ---------- */
+function home(){return `<section class="home"><div>${px('hat',6)}</div>
+<h1 class="lg" aria-label="RE:CIPE">${[...'RE:CIPE'].map((c,i)=>`<span style="--i:${i}">${c}</span>`).join('')}</h1>
+<p class="ph">${phrase}</p>
+<div class="cards">
+<a class="card" href="#recommend">${px('tomato',7)}<div><h3>레시피 추천</h3><p>냉장고 속 재료로,<br>오늘 뭐 먹지?</p><span class="btn">지금 시작하기 →</span></div></a>
+<a class="card" href="#variation">${px('hat',6)}<div><h3>레시피 변형</h3><p>기존 레시피를 내 입맛에 맞게,<br>새롭게 변형해보세요!</p><span class="btn">지금 시작하기 →</span></div></a></div>
+<div class="chef">${px('chef',8)}</div>
+<div class="fl" style="right:8%;top:90px">${px('tomato',6)}</div><div class="fl" style="right:6%;bottom:14%;animation-delay:1s">${px('tomato',5)}</div><div class="fl" style="left:8%;top:60px;animation-delay:.5s">${px('tomato',4)}</div>
+<div class="foot">A RECIPE IS A STARTING POINT.</div></section>`}
+
+/* ---------- 레시피 추천 ---------- */
+const RC=[
+{n:'계란볶음밥',t:15,d:'쉬움',i:['밥','계란','대파','간장','식용유'],s:['대파를 기름에 볶아 향을 낸다','계란을 스크램블해 밥과 함께 볶는다','간장으로 간한다']},
+{n:'감자채볶음',t:15,d:'쉬움',i:['감자','양파','소금','식용유'],s:['감자를 채 썰어 물에 담가 전분을 뺀다','양파와 함께 센 불에 볶는다','소금으로 간한다']},
+{n:'토마토 계란볶음',t:10,d:'쉬움',i:['토마토','계란','소금','설탕','식용유'],s:['계란을 반쯤 익혀 덜어둔다','토마토를 볶다가 소금·설탕으로 간한다','계란을 다시 넣고 섞는다']},
+{n:'김치찌개',t:25,d:'보통',i:['김치','돼지고기','두부','대파','물'],s:['돼지고기와 김치를 볶는다','물을 붓고 15분 끓인다','두부와 대파를 넣고 5분 더 끓인다']},
+{n:'참치마요 주먹밥',t:10,d:'쉬움',i:['밥','참치','마요네즈','김','소금'],s:['참치 기름을 빼고 마요네즈와 섞는다','밥에 소금을 섞고 참치를 넣어 뭉친다','김가루나 김으로 마무리한다']},
+{n:'된장찌개',t:25,d:'보통',i:['된장','두부','애호박','양파','물'],s:['물에 된장을 푼다','양파·애호박을 넣고 끓인다','두부를 넣고 한소끔 더 끓인다']}];
+let have=[];
+function recommend(){return `<div class="pg"><h1>냉장고 속 재료로, 오늘 뭐 먹지?</h1><p class="sub">가지고 있는 재료를 입력하면 만들 수 있는 레시피를 찾아주는 공간입니다.</p>
+<div class="box"><label for="hi">냉장고 재료 입력</label><div class="row"><input id="hi" placeholder="예: 계란, 감자 (쉼표나 Enter로 추가)"><button class="btn x" onclick="addH()">추가</button></div><div class="chips" id="hc"></div></div>
+<div class="note">현재는 내장된 샘플 레시피 ${RC.length}개로 검색합니다. 레시피 DB나 AI 추천은 이 영역(<code>recommend()</code>)에 연결할 수 있습니다.</div>
+<h2>오늘의 레시피 추천</h2><div id="hr"></div></div>`}
+function addH(){const v=$('#hi').value.split(/[,\n]/).map(s=>s.trim()).filter(Boolean);v.forEach(x=>!have.includes(x)&&have.push(x));$('#hi').value='';drawH()}
+function drawH(){$('#hc').innerHTML=have.map((h,i)=>`<span class="chip" onclick="have.splice(${i},1);drawH()" title="삭제">${esc(h)} ✕</span>`).join('');
+if(!have.length){$('#hr').innerHTML='<p class="sub">재료를 추가하면 추천 결과가 나타납니다.</p>';return}
+const m=RC.map(r=>{const h=r.i.filter(x=>have.some(y=>x.includes(y)||y.includes(x)));return{r,h,miss:r.i.filter(x=>!h.includes(x)),sc:h.length/r.i.length}}).filter(x=>x.h.length).sort((a,b)=>b.sc-a.sc);
+$('#hr').innerHTML=m.length?m.map(({r,miss,sc})=>`<div class="box"><b style="font:20px Jua">${r.n}</b> <span class="chip">⏱ ${r.t}분</span><span class="chip">${r.d}</span> <span class="chip">보유 ${Math.round(sc*100)}%</span>
+<p>${miss.length?'부족한 재료: <b>'+miss.join(', ')+'</b>':'<b>필요한 재료를 모두 가지고 있어요!</b>'}</p><ol>${r.s.map(s=>`<li>${s}</li>`).join('')}</ol></div>`).join(''):'<div class="err">입력한 재료로 만들 수 있는 샘플 레시피가 없습니다. 다른 재료를 추가해 보세요.</div>'}
+
+/* ---------- 레시피 변형 ---------- */
+const SUB=[
+{f:/한천/,t:/젤라틴/,k:2.5,n:'한천→젤라틴: 응고력이 달라 동량 대체 불가. 일반적으로 한천보다 약 2~3배(여기선 2.5배) 필요',st:'젤라틴은 찬물에 5~10분 불린 뒤 50~60℃에서 녹이세요. 끓이면 응고력이 떨어집니다. 한천처럼 끓이는 단계는 필요 없습니다.',r:['젤라틴은 실온에서 쉽게 무르고 냉장 보관이 필요함','식감이 단단하고 깔끔한 한천 질감 대신 탄력 있고 부드러운 질감이 됨'],x:'냉장 4시간 이상 굳히고, 형태 유지가 중요하면 젤라틴을 10% 늘려 보세요.'},
+{f:/버터/,t:/오일|기름/,k:.8,add:[['물',.15]],n:'버터→오일: 버터는 약 80%가 지방, 나머지는 수분. 오일은 0.8배 + 부족한 수분 보충',st:'버터를 녹이거나 크림화하는 단계는 오일을 섞는 단계로 바꾸세요.',r:['버터 특유의 풍미와 고소함이 줄어듦','크림화로 만드는 부풀림·바삭한 결이 약해짐'],x:'버터 풍미가 필요하면 소량(10~20%)만 남기세요.'},
+{f:/밀가루|박력|중력|강력/,t:/쌀가루/,k:1,n:'밀가루→쌀가루: 글루텐이 없어 구조·탄성이 약함. 1:1로 시작',st:'반죽 수분은 한 번에 넣지 말고 나눠 넣으며 점도를 확인하세요.',r:['글루텐이 없어 쫄깃함·부풀림이 줄거나 부서질 수 있음','흡수하는 수분량이 달라 반죽 질기가 바뀜'],x:'결합력이 필요하면 전분이나 계란을 소량 추가해 보세요.'},
+{f:/설탕|올리고당|물엿/,t:/알룰로스/,k:1.4,n:'설탕→알룰로스: 단맛이 약 70% 수준이라 1.4배',st:'알룰로스는 갈변이 빨라 불을 약하게 하세요.',r:['갈변이 빠르고 질감이 더 촉촉/부드러워짐'],x:'굽는 온도를 10℃ 낮춰 보세요.'},
+{f:/설탕|올리고당|물엿/,t:/에리스리톨/,k:1.4,n:'설탕→에리스리톨: 단맛이 약 70% 수준이라 1.4배',st:'',r:['입 안에서 시원한 느낌이 나고 식으면 결정이 생길 수 있음'],x:'소량의 액상 감미료를 섞으면 결정화가 줄어듭니다.'},
+{f:/설탕/,t:/꿀/,k:.8,add:[['물',-.15]],n:'설탕→꿀: 꿀은 약 80% 당 + 수분이라 0.8배, 수분은 줄임',st:'',r:['꿀 향이 더해지고 갈변이 빨라짐'],x:'굽는 온도를 약간 낮추세요.'}];
+const cat=n=>/한천|젤라틴|펙틴|곤약/.test(n)?'gel':/설탕|올리고당|물엿|꿀|시럽|알룰로스|에리스리톨/.test(n)?'sw':'';
+const mass=r=>r.a==null||!/^(g|ml)$/i.test(r.u)?(/^(kg|l)$/i.test(r.u)&&r.a!=null?r.a*1000:0):r.a;
+function parse(t){return t.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const m=l.match(/^(.+?)\s*([\d.]+)\s*(kg|g|ml|l|개|큰술|작은술|컵)?\s*$/i);return m?{n:m[1].trim(),a:parseFloat(m[2]),u:m[3]||''}:{n:l,a:null,u:''}})}
+let VM='sub',IMG=null,LAST='';
+function variation(){return `<div class="pg"><h1>기존 레시피를 내 입맛대로 바꿔보세요</h1><p class="sub">재료를 대체하거나 양을 바꾸면, 재료의 역할을 고려해 다른 재료와 조리법을 함께 조정합니다.</p>
+<div class="box"><label for="rn">레시피 이름</label><input id="rn" placeholder="예: 팥양갱">
+<label for="ri">재료 (한 줄에 하나, “이름 양단위”)</label><textarea id="ri" placeholder="적앙금 200g&#10;한천 분말 5g&#10;설탕 20g&#10;올리고당 25g&#10;물 120g"></textarea>
+<label for="rs">조리 순서 (한 줄에 한 단계, 생략 가능)</label><textarea id="rs" placeholder="물에 한천을 넣고 끓인다&#10;설탕과 올리고당을 넣어 녹인다&#10;앙금을 넣고 섞은 뒤 틀에 붓는다"></textarea>
+<label for="ph">또는 레시피 사진 (JPG·PNG·WEBP, 5MB 이하)</label><input id="ph" type="file" accept="image/jpeg,image/png,image/webp" onchange="pic(this)"><div id="pv"></div></div>
+<div class="box mode"><b>변형 방식</b><br><label><input type="radio" name="m" value="sub" checked onchange="mode(this.value)"> 재료 대체</label><label><input type="radio" name="m" value="ratio" onchange="mode(this.value)"> 비율 변경</label><label><input type="radio" name="m" value="both" onchange="mode(this.value)"> 대체 + 비율 변경</label>
+<div id="subs"><label>재료 대체</label><div id="sl"></div><button class="btn o" onclick="addRow('sl','기존 재료 (예: 한천)','바꿀 재료 (예: 젤라틴)',1)">+ 대체 추가</button></div>
+<div id="rats" hidden><label>비율 변경</label><div id="rl"></div><button class="btn o" onclick="addRow('rl','재료 (예: 적앙금)','새 양 (숫자, 예: 250)',0)">+ 비율 추가</button></div>
+<label for="rp">변형 목적</label><input id="rp" placeholder="예: 팥 맛을 더 진하게 / 단맛 줄이기"></div>
+<button class="btn" onclick="run()">변형 분석하기</button><div id="er"></div><div id="out"></div></div>`}
+function mode(v){VM=v;$('#subs').hidden=v=='ratio';$('#rats').hidden=v=='sub'}
+function addRow(id,a,b,sub){const d=document.createElement('div');d.className='row';d.innerHTML=`<input class="a" placeholder="${a}"><input class="b" placeholder="${b}" ${sub?'list="ing"':'inputmode="decimal"'}><button class="btn o x" onclick="this.parentNode.remove()" aria-label="삭제">✕</button>`;$('#'+id).appendChild(d)}
+function pic(el){const f=el.files[0];$('#pv').innerHTML='';IMG=null;if(!f)return;
+if(!/^image\/(jpeg|png|webp)$/.test(f.type)){$('#pv').innerHTML='<div class="err">JPG, PNG, WEBP 파일만 올릴 수 있습니다.</div>';el.value='';return}
+if(f.size>5e6){$('#pv').innerHTML='<div class="err">파일이 5MB를 넘습니다. 더 작은 사진을 올려 주세요.</div>';el.value='';return}
+const r=new FileReader();r.onload=()=>{IMG=r.result;$('#pv').innerHTML=`<img src="${IMG}" alt="업로드한 레시피" style="max-width:200px;border-radius:10px;margin-top:8px"><div class="note">${API_URL?'사진은 AI 서버로 보내 분석합니다. 분석 결과를 보고 재료·조리 순서 칸에 옮겨 적은 뒤 진행하세요.':'AI 서버가 아직 연결되지 않아 사진 속 글자는 인식하지 못합니다. 사진을 보면서 재료와 조리 순서를 직접 입력해 주세요.'}</div>`};r.readAsDataURL(f)}
+function pairs(id){return[...document.querySelectorAll('#'+id+' .row')].map(r=>[r.children[0].value.trim(),r.children[1].value.trim()]).filter(p=>p[0]&&p[1])}
+const find=(rows,q)=>rows.find(r=>r.n.includes(q)||q.includes(r.n));
+function run(){
+$('#er').innerHTML='';$('#out').innerHTML='';
+const bad=m=>{$('#er').innerHTML=`<div class="err">${m}</div>`};
+const name=$('#rn').value.trim()||'이름 없는 레시피',items=parse($('#ri').value),steps=$('#rs').value.split('\n').map(s=>s.trim()).filter(Boolean),purpose=$('#rp').value.trim();
+if(!items.length)return bad('재료를 한 줄에 하나씩 입력해 주세요. 예: 한천 분말 5g'+(IMG?' (사진은 아직 자동 분석되지 않습니다)':''));
+const subs=VM!='ratio'?pairs('sl'):[],rats=VM!='sub'?pairs('rl'):[];
+if(!subs.length&&!rats.length)return bad('변형할 재료를 하나 이상 지정해 주세요. “+ 대체 추가” 또는 “+ 비율 추가”를 눌러 입력합니다.');
+const rows=items.map(x=>({...x,old:x.a,nn:x.n,why:[]})),risks=[],fixes=[],stepN=[],ren=[];let pen=0,known=0;
+const tot0=rows.reduce((s,r)=>s+mass(r),0);
+for(const[o,nw]of subs){const r=find(rows,o);if(!r)return bad(`“${o}”을(를) 재료 목록에서 찾지 못했습니다. 이름을 확인해 주세요.`);
+const ru=SUB.find(u=>u.f.test(r.n)&&u.t.test(nw));r.nn=nw;r.sub=1;ren.push([r.n,nw]);
+if(ru){known++;if(r.a!=null)r.a=r.a*ru.k;r.why.push(ru.n);if(ru.st)stepN.push(ru.st);risks.push(...ru.r);fixes.push(ru.x);
+(ru.add||[]).forEach(([an,f])=>{const q=rows.find(z=>z.n==an);const d=(r.old||0)*f;if(q&&q.a!=null){q.a=Math.max(0,q.a+d);q.why.push(`${r.n} 대체에 따른 수분 보정 (${d>0?'+':''}${fmt(d)})`)}else if(d>0)rows.push({n:an,a:d,u:r.u,old:0,nn:an,why:['대체 재료의 부족한 수분 보충 (신규)']})})}
+else{pen+=25;r.why.push('내장 규칙에 없는 조합: 동량(1:1)으로 가정');risks.push(`“${r.n}→${nw}” 조합은 이 사이트의 규칙에 없어 검증되지 않았습니다. 재료의 응고·수분·당 역할이 다를 수 있음`);fixes.push(`“${nw}”의 특성(수분량, 응고·결착 능력)을 확인한 뒤 소량 테스트하세요.`)}}
+for(const[o,v]of rats){const r=find(rows,o),n=parseFloat(v);if(!r||r.a==null)return bad(`“${o}”은(는) 양이 입력된 재료만 비율 변경이 가능합니다.`);if(!(n>=0))return bad(`“${o}”의 새 양은 숫자로 입력해 주세요.`);r.a=n;r.why.push(`직접 변경 (${r.old}→${n})`)}
+const tot1=rows.reduce((s,r)=>s+mass(r),0);
+if(tot0>0&&Math.abs(tot1/tot0-1)>.08)rows.forEach(r=>{if(cat(r.nn)=='gel'&&!r.sub&&r.a!=null){const nv=r.a*tot1/tot0;r.why.push(`전체 중량 ${fmt(tot0)}→${fmt(tot1)}에 맞춰 응고제 농도 유지 (${fmt(r.a)}→${fmt(nv)})`);r.a=nv}});
+if(tot0>0){const sw=a=>rows.reduce((s,r)=>s+(cat(r.nn)=='sw'?mass({...r,a:r[a]}):0),0);const a0=sw('old')/tot0*100,a1=sw('a')/tot1*100;
+if(a0>0&&Math.abs(a1-a0)/a0>.1){risks.push(`당류 비율이 ${fmt(a0)}%→${fmt(a1)}%로 변해 단맛과 물성(굳기·보존성)이 달라질 수 있음`);fixes.push('단맛이 목표와 다르면 당류를 같은 비율로 맞춰 보세요.');pen+=5}}
+if(/단맛.*(줄|낮)|덜\s*달/.test(purpose))rows.forEach(r=>{if(cat(r.nn)=='sw'&&r.a!=null){r.a*=.85;r.why.push('목적(단맛 줄이기): 15% 감량')}});
+if(/진한|진하/.test(purpose)&&rats.length)fixes.push('맛이 진해진 만큼 수분·당 균형을 확인하고, 짠맛/단맛은 소량씩 조절하세요.');
+if(/칼로리/.test(purpose))fixes.push('칼로리를 줄이려면 지방·당류 재료부터 줄이되, 질감 변화가 크니 소량 테스트하세요.');
+if(/형태|질감.*유지/.test(purpose))fixes.push('형태 유지가 목표이므로 응고·결착 재료의 양과 식히는 시간을 우선 점검하세요.');
+if(!risks.length)risks.push('큰 위험은 규칙상 발견되지 않았지만, 실제 조리로 확인된 것은 아닙니다.');
+const sc=100-pen-risks.length*8,lv=sc>=70?['높음','hi']:sc>=40?['보통','mid']:['낮음','lo'];
+const lines=rows.map(r=>`${r.nn} ${r.a==null?'':fmt(r.a)+r.u}`);
+const ns=steps.map(s=>ren.reduce((t,[a,b])=>t.split(a).join(b),s));
+const tr=rows.map(r=>`<tr><td>${esc(r.n)}${r.nn!=r.n?' → <b>'+esc(r.nn)+'</b>':''}</td><td>${r.old==null||r.old===0&&!r.u?'-':fmt(r.old)+r.u}</td><td><b>${r.a==null?'-':fmt(r.a)+r.u}</b></td><td>${r.why.map(esc).join('<br>')||'변경 없음'}</td></tr>`).join('');
+LAST=`[RE:CIPE] ${name} 변형 레시피\n\n■ 재료\n${lines.join('\n')}\n\n■ 조리 순서\n${[...stepN.map(s=>'(변경) '+s),...ns].map((s,i)=>(i+1)+'. '+s).join('\n')||'(입력된 조리 순서 없음)'}\n\n■ 실제 조리 가능성: ${lv[0]}\n■ 예상 문제\n- ${risks.join('\n- ')}\n■ 보정 방법\n- ${fixes.join('\n- ')||'없음'}\n※ 규칙 기반 추정이며 실제 조리로 검증되지 않았습니다. 처음엔 1/4 분량으로 테스트하세요.`;
+$('#out').innerHTML=`<h2>변형 결과</h2><div class="box"><b>실제 조리 가능성</b> <span class="tag ${lv[1]}">${lv[0]}</span>
+<div class="note">이 분석은 ${known?'내장 규칙(재료 역할·농도 계산)':'일반 가정'} 기반 추정이며, AI나 실제 조리로 검증한 결과가 아닙니다. ${pen?'규칙에 없는 조합이 포함되어 불확실성이 큽니다. ':''}처음에는 1/4 분량으로 테스트 배합을 해보세요.</div></div>
+<div class="box"><b>재료량 비교</b><div style="overflow-x:auto"><table><tr><th>재료</th><th>기존</th><th>변형</th><th>조정 이유</th></tr>${tr}</table></div></div>
+<div class="two"><div class="box"><b>기존 조리 순서</b><ol>${steps.map(s=>`<li>${esc(s)}</li>`).join('')||'<li>입력 없음</li>'}</ol></div><div class="box"><b>수정된 조리 순서</b>${stepN.length?'<ul>'+stepN.map(s=>`<li><b>변경</b> ${esc(s)}</li>`).join('')+'</ul>':''}<ol>${ns.map(s=>`<li>${esc(s)}</li>`).join('')||'<li>입력 없음</li>'}</ol></div></div>
+<div class="two"><div class="box"><b>예상되는 실패 요인</b><ul>${risks.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></div><div class="box"><b>보정 방법·추가 조정</b><ul>${fixes.map(s=>`<li>${esc(s)}</li>`).join('')||'<li>없음</li>'}</ul></div></div>
+<button class="btn" onclick="navigator.clipboard.writeText(LAST).then(()=>this.textContent='복사됨!',()=>alert('복사에 실패했습니다. 직접 선택해 복사해 주세요.'))">결과 복사</button> <button class="btn o" onclick="dl()">txt로 저장</button>
+${API_URL?' <button class="btn o" onclick="ai()">AI로 다시 분석</button><div id="ai"></div>':''}`}
+function dl(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([LAST],{type:'text/plain'}));a.download='recipe-variation.txt';a.click()}
+async function ai(){const o=$('#ai');o.innerHTML='<div class="note">AI 분석 중…</div>';try{const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:LAST,purpose:$('#rp').value,image:IMG})});if(!r.ok)throw 0;const d=await r.json();o.innerHTML=`<div class="box" style="white-space:pre-wrap;margin-top:12px">${esc(d.text||'응답이 비어 있습니다.')}</div>`}catch(e){o.innerHTML='<div class="err">AI 서버에 연결하지 못했습니다. API_URL과 서버 상태를 확인해 주세요.</div>'}}
+
+/* ---------- 라우터 ---------- */
+const PG={home,recommend,variation};
+function route(){const p=PG[location.hash.slice(1)]?location.hash.slice(1):'home';$('#app').innerHTML=PG[p]();
+document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.dataset.p==p));window.scrollTo(0,0);
+if(p=='recommend'){drawH();$('#hi').addEventListener('keydown',e=>e.key=='Enter'&&addH())}
+if(p=='variation'){VM='sub';addRow('sl','기존 재료 (예: 한천)','바꿀 재료 (예: 젤라틴)',1)}}
+addEventListener('hashchange',route);route();
+</script></body></html>
